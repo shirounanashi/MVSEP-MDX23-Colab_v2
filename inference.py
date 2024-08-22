@@ -1,5 +1,11 @@
 # coding: utf-8
+if __name__ == '__main__':
+    import os
+     
+    gpu_use = "0,1"
 
+    print('GPU use: {}'.format(gpu_use))
+    os.environ["CUDA_VISIBLE_DEVICES"] = "{}".format(gpu_use)
 import warnings
 warnings.filterwarnings("ignore")
 
@@ -589,7 +595,7 @@ class EnsembleDemucsMDXMusicSeparationModel:
             sample_rate,
             current_file_number=0,
             total_files=0,
-            device="0,1",
+            device=device,
     ):
         """
         Implements the sound separation for a single sound file
