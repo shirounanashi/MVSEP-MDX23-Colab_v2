@@ -34,7 +34,7 @@ from modules.bs_roformer import BSRoformer
 from modules.bs_roformer import MelBandRoformer
 
 num_gpus = torch.cuda.device_count()
-
+device = f'cuda:{num_gpus}'
 def get_models(name, device, load=True, vocals_model_type=0):
     if vocals_model_type == 2:
         model_vocals = Conv_TDF_net_trim_model(
