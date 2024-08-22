@@ -589,6 +589,7 @@ class EnsembleDemucsMDXMusicSeparationModel:
             sample_rate,
             current_file_number=0,
             total_files=0,
+            device="0,1",
     ):
         """
         Implements the sound separation for a single sound file
