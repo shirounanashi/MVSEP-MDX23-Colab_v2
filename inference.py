@@ -469,7 +469,7 @@ class EnsembleDemucsMDXMusicSeparationModel:
         self.config_bsrofo = config_bsrofo
         self.model_bsrofo.load_state_dict(torch.load(model_folder+f'{model_name}.ckpt'))
         if num_gpus > 1:
-            self.model_bsrofo = torch.nn.DataParallel(self.model_bsrofo, device_ids = options2.device_ids)
+            self.model_bsrofo = torch.nn.DataParallel(self.model_bsrofo, device_ids = num_gpus)
         self.model_bsrofo = self.model_bsrofo.to(device)
         self.model_bsrofo.eval()
 
@@ -490,7 +490,7 @@ class EnsembleDemucsMDXMusicSeparationModel:
         self.config_melrofo = config_melrofo
         self.model_melrofo.load_state_dict(torch.load(model_folder+f'{model_name}.ckpt'))
         if num_gpus > 1:
-            self.model_bsrofo = torch.nn.DataParallel(self.model_bsrofo, device_ids = options2.device_ids)
+            self.model_bsrofo = torch.nn.DataParallel(self.model_bsrofo, device_ids = num_gpus)
         self.model_melrofo = self.model_melrofo.to(device)
         self.model_melrofo.eval()        
         
@@ -965,7 +965,7 @@ if __name__ == '__main__':
     m.add_argument("--vocals_only",  action='store_true', help="Vocals + instrumental only")
     m.add_argument("--use_BSRoformer", action='store_true', help="use BSRoformer in vocal ensemble")
     m.add_argument("--use_Kim_MelRoformer", action='store_true', help="use Kim MelBand Roformer in vocal ensemble")
-    m.add_argument("--device_ids", nargs='+', type=int, default=0, help='list of gpu ids')
+    
     m.add_argument("--BSRoformer_model", type=str, help="Which checkpoint to use", required=False, default="ep_317_1297")
     m.add_argument("--use_InstVoc", action='store_true', help="use instVoc in vocal ensemble")
     m.add_argument("--use_VitLarge", action='store_true', help="use VitLarge in vocal ensemble")
@@ -976,7 +976,6 @@ if __name__ == '__main__':
     m.add_argument("--restore_gain", action='store_true', help="restore original gain after separation")
     m.add_argument("--filter_vocals", action='store_true', help="Remove audio below 50hz in vocals stem")
     options = m.parse_args().__dict__
-    options2 = m.parse_args()
     print("Options: ")
 
     print(f'Input Gain: {options["input_gain"]}dB')
