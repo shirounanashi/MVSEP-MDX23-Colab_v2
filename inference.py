@@ -1,12 +1,5 @@
 # coding: utf-8
 
-if __name__ == '__main__':
-    import os
-     
-    gpu_use = "0"
-
-    print('GPU use: {}'.format(gpu_use))
-    os.environ["CUDA_VISIBLE_DEVICES"] = "{}".format(gpu_use)
 import warnings
 warnings.filterwarnings("ignore")
 
