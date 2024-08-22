@@ -546,7 +546,7 @@ class EnsembleDemucsMDXMusicSeparationModel:
             self.infer_session1 = ort.InferenceSession(
                 model_path_onnx1,
                 providers=providers,
-                provider_options=[{"device_id": 0}],
+                provider_options=[{"device_id": device}],
             )
             
         # InstHQ4 init
@@ -562,7 +562,7 @@ class EnsembleDemucsMDXMusicSeparationModel:
             self.infer_session2 = ort.InferenceSession(
                 model_path_onnx2,
                 providers=providers,
-                provider_options=[{"device_id": 0}],
+                provider_options=[{"device_id": device}],
             )
         
         
