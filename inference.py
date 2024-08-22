@@ -361,8 +361,8 @@ class EnsembleDemucsMDXMusicSeparationModel:
         """
 
         if torch.cuda.is_available():
-            device = "cuda"
-            device = 'cuda:0,1'
+            num_gpus = torch.cuda.device_count()
+            device = f'cuda:{num_gpus}'
         else:
             device = 'cpu'
         if 'cpu' in options:
