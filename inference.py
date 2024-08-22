@@ -356,7 +356,7 @@ class EnsembleDemucsMDXMusicSeparationModel:
 
         if torch.cuda.is_available():
             device = "cuda"
-            device = f'cuda:{options.device_ids[0]}' if type(options.device_ids) == list else f'cuda:{options.device_ids}'
+            device = f'cuda:{options2.device_ids[0]}' if type(options2.device_ids) == list else f'cuda:{options2.device_ids}'
         else:
             device = 'cpu'
         if 'cpu' in options:
@@ -975,6 +975,7 @@ if __name__ == '__main__':
     m.add_argument("--restore_gain", action='store_true', help="restore original gain after separation")
     m.add_argument("--filter_vocals", action='store_true', help="Remove audio below 50hz in vocals stem")
     options = m.parse_args().__dict__
+    options2 = m.parse_args()
     print("Options: ")
 
     print(f'Input Gain: {options["input_gain"]}dB')
