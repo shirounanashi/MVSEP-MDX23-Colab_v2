@@ -359,15 +359,7 @@ class EnsembleDemucsMDXMusicSeparationModel:
         """
             options - user options
         """
-
-        if torch.cuda.is_available():
-            num_gpus = torch.cuda.device_count()
-            device = f'cuda:{num_gpus}'
-        else:
-            device = 'cpu'
-        if 'cpu' in options:
-            if options['cpu']:
-                device = 'cpu'
+        
         # print('Use device: {}'.format(device))
         self.single_onnx = False
         if 'single_onnx' in options:
