@@ -362,7 +362,7 @@ class EnsembleDemucsMDXMusicSeparationModel:
 
         if torch.cuda.is_available():
             device = "cuda"
-            device = f'cuda:{options2.device_ids[0]}' if type(options2.device_ids) == list else f'cuda:{options2.device_ids}'
+            device = 'cuda:0,1'
         else:
             device = 'cpu'
         if 'cpu' in options:
