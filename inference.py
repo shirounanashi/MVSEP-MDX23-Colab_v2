@@ -362,7 +362,8 @@ class EnsembleDemucsMDXMusicSeparationModel:
         """
 
         if torch.cuda.is_available():
-            device = 'cuda:0'
+            device = "cuda"
+            device = f'cuda:{args.device_ids[0]}' if type(args.device_ids) == list else f'cuda:{args.device_ids}'
         else:
             device = 'cpu'
         if 'cpu' in options:
@@ -970,7 +971,7 @@ if __name__ == '__main__':
     m.add_argument("--vocals_only",  action='store_true', help="Vocals + instrumental only")
     m.add_argument("--use_BSRoformer", action='store_true', help="use BSRoformer in vocal ensemble")
     m.add_argument("--use_Kim_MelRoformer", action='store_true', help="use Kim MelBand Roformer in vocal ensemble")
-    
+    m.add_argument("--device_ids", nargs='+', type=int, default=0, help='list of gpu ids')
     m.add_argument("--BSRoformer_model", type=str, help="Which checkpoint to use", required=False, default="ep_317_1297")
     m.add_argument("--use_InstVoc", action='store_true', help="use instVoc in vocal ensemble")
     m.add_argument("--use_VitLarge", action='store_true', help="use VitLarge in vocal ensemble")
