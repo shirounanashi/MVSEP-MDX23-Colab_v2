@@ -477,7 +477,7 @@ class EnsembleDemucsMDXMusicSeparationModel:
         self.config_bsrofo = config_bsrofo
         self.model_bsrofo.load_state_dict(torch.load(model_folder+f'{model_name}.ckpt'))
         if num_gpus > 1:
-            self.model_bsrofo = torch.nn.DataParallel(self.model_bsrofo)
+            self.model_bsrofo = torch.nn.DataParallel(self.model_bsrofo, device_ids = options2.device_ids)
         self.model_bsrofo = self.model_bsrofo.to(device)
         self.model_bsrofo.eval()
 
@@ -498,7 +498,7 @@ class EnsembleDemucsMDXMusicSeparationModel:
         self.config_melrofo = config_melrofo
         self.model_melrofo.load_state_dict(torch.load(model_folder+f'{model_name}.ckpt'))
         if num_gpus > 1:
-            self.model_melrofo = torch.nn.DataParallel(self.model_melrofo)
+            self.model_bsrofo = torch.nn.DataParallel(self.model_bsrofo, device_ids = options2.device_ids)
         self.model_melrofo = self.model_melrofo.to(device)
         self.model_melrofo.eval()        
         
